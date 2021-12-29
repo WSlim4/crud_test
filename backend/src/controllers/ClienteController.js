@@ -32,8 +32,12 @@ class ClienteController {
         }
     }
 
-    async delete() {
-
+    async delete(id) {
+        try {
+            return await ClienteService.findAndDelete(id);
+        } catch (error) {
+            throw error;
+        }
     }
 
     async update(id, data) {
