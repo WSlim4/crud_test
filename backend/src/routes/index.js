@@ -12,4 +12,13 @@ routes.post('/', async (req, res) => {
     }
 });
 
+routes.get('/', async (req, res) => {
+    try {
+
+        return res.status(200).send({ data: "GET" });
+    } catch (error) {
+        return res.status(500).send({ error: error.message });
+    }
+});
+
 module.exports = routes;
