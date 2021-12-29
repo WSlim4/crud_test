@@ -22,8 +22,14 @@ class ClienteController {
         }
     }
 
-    async show() {
+    async show(id) {
+        try {
+            const cliente = await ClienteService.findOne(id);
 
+            return cliente;
+        } catch (error) {
+            throw error;
+        }
     }
 
     async delete() {
