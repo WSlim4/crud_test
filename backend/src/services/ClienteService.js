@@ -32,6 +32,16 @@ class ClienteService {
             throw error;
         }
     }
+
+    async findAndUpdate(id, data) {
+        try {
+            const cliente = await Cliente.findOneAndUpdate({ id: id }, data);
+
+            return await this.findOne(cliente.id);
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new ClienteService;
