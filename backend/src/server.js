@@ -1,9 +1,11 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const PORT = 3333;
 
 class App {
     constructor() {
         this.express = express();
+        this.database();
         this.cors();
         this.middlewares();
         this.routes();
@@ -11,6 +13,16 @@ class App {
         this.express.listen(PORT, () => {
             console.log("Api running on port " + PORT);
         })
+    }
+
+    async database() {
+        try {
+            await mongoose.connect('mongodb+srv://mongoUser:mongo123@cluster0.0sx4k.mongodb.net/Kittens?retryWrites=true&w=majority');
+            console.log("Banco de dados conectado");
+        } catch (error) {
+            console.log("Erro ao conectar ao banco de dados", error);
+        }
+
     }
 
     cors() {
