@@ -14,8 +14,9 @@ routes.post('/', async (req, res) => {
 
 routes.get('/', async (req, res) => {
     try {
+        const response = await ClienteController.index();
 
-        return res.status(200).send({ data: "GET" });
+        return res.status(200).send({ data: response });
     } catch (error) {
         return res.status(500).send({ error: error.message });
     }
