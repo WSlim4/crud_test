@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const ClienteController = require('../controllers/ClienteController');
+const clienteValidator = require('../validations/cliente');
 const routes = Router();
 
-routes.post('/', ClienteController.create);
+routes.post('/', clienteValidator, ClienteController.create);
 routes.get('/', ClienteController.index);
 routes.get('/:id', ClienteController.show);
-routes.put('/:id', ClienteController.update);
+routes.put('/:id', clienteValidator, ClienteController.update);
 routes.delete('/:id', ClienteController.destroy);
 
 module.exports = routes;
