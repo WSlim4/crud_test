@@ -2,7 +2,7 @@ const { Router } = require('express');
 const ClienteController = require('../controllers/ClienteController');
 const routes = Router();
 
-routes.get('/', async (req, res) => {
+routes.post('/', async (req, res) => {
     try {
         const response = await ClienteController.create(req.body);
 
