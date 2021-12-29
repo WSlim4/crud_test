@@ -36,8 +36,14 @@ class ClienteController {
 
     }
 
-    async update() {
+    async update(id, data) {
+        try {
+            const cliente = await ClienteService.findAndUpdate(id, data);
 
+            return cliente;
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
