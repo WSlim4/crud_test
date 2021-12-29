@@ -22,6 +22,16 @@ class ClienteService {
             throw error;
         }
     }
+
+    async findOne(id) {
+        try {
+            const cliente = await Cliente.findById(id);
+
+            return cliente;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new ClienteService;
