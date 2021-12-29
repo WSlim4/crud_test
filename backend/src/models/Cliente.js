@@ -8,9 +8,9 @@ const ClienteSchema = new Schema({
     telefone: String,
     endereco: {
         rua: String,
-        numero: Number,
         bairro: String,
-        cidade: String
+        cidade: String,
+        numero: Number
     }
 });
 
