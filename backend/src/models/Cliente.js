@@ -5,7 +5,7 @@ const ClienteSchema = new Schema({
     cpf: String,
     nome: String,
     email: String,
-    telefone: String,
+    celular: String,
     endereco: {
         rua: String,
         bairro: String,
