@@ -2,51 +2,52 @@ const ClienteService = require('../services/ClienteService');
 
 class ClienteController {
 
-    async index() {
+    async index(req, res) {
         try {
             const clientes = await ClienteService.findAll();
 
-            return clientes;
+            return res.status(200).send({ data: clientes });
         } catch (error) {
-            throw error;
+            return res.status(500).send({ error: error.message });
         }
     }
 
-    async show(id) {
+    async show(req, res) {
         try {
-            const cliente = await ClienteService.findOne(id);
+            const cliente = await ClienteService.findOne(req.params.id);
 
-            return cliente;
+            return res.status(200).send({ data: cliente });
         } catch (error) {
-            throw error;
+            return res.status(500).send({ error: error.message });
         }
     }
 
-    async create(data) {
+    async create(req, res) {
         try {
-            const cliente = await ClienteService.save(data);
+            const cliente = await ClienteService.save(req.body);
 
-            return cliente;
+            return res.status(200).send({ data: cliente });
         } catch (error) {
-            throw error;
+            return res.status(500).send({ error: error.message });
         }
     }
 
-    async update(id, data) {
+    async update(req, res) {
         try {
-            const cliente = await ClienteService.findAndUpdate(id, data);
+            const cliente = await ClienteService.findAndUpdate(req.params.id, req.body);
 
-            return cliente;
+            return res.status(200).send({ data: cliente });
         } catch (error) {
-            throw error;
+            return res.status(500).send({ error: error.message });
         }
     }
 
-    async destroy(id) {
+    async destroy(req, res) {
         try {
-            return await ClienteService.findAndDelete(id);
+            const response = await ClienteService.findAndDelete(req.params.id);
+            return res.status(200).send({ message: response });
         } catch (error) {
-            throw error;
+            return res.status(500).send({ error: error.message });
         }
     }
 }
