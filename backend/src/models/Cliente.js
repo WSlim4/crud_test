@@ -10,6 +10,7 @@ const ClienteSchema = new Schema({
         rua: String,
         bairro: String,
         cidade: String,
+        uf: String,
         numero: Number
     },
     dataCriacao: { type: Date, default: Date.now },
