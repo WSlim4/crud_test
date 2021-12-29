@@ -12,6 +12,16 @@ class ClienteService {
             throw error;
         }
     }
+
+    async findAll() {
+        try {
+            const clientes = await Cliente.find({});
+
+            return clientes;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new ClienteService;
