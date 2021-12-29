@@ -1,4 +1,5 @@
 const express = require('express');
+const PORT = 3333;
 
 class App {
     constructor() {
@@ -6,6 +7,10 @@ class App {
         this.cors();
         this.middlewares();
         this.routes();
+
+        this.express.listen(PORT, () => {
+            console.log("Api running on port " + PORT);
+        })
     }
 
     cors() {
