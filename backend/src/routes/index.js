@@ -22,4 +22,16 @@ routes.get('/', async (req, res) => {
     }
 });
 
+routes.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const response = await ClienteController.show(id);
+
+        return res.status(200).send({ data: response });
+    } catch (error) {
+        return res.status(500).send({ error: error.message });
+    }
+});
+
 module.exports = routes;
