@@ -1,4 +1,5 @@
 const ClienteService = require('../services/ClienteService');
+const { validationResult } = require('express-validator');
 
 class ClienteController {
 
@@ -24,6 +25,12 @@ class ClienteController {
 
     async create(req, res) {
         try {
+            const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+
             const cliente = await ClienteService.save(req.body);
 
             return res.status(200).send({ data: cliente });
@@ -34,6 +41,12 @@ class ClienteController {
 
     async update(req, res) {
         try {
+            const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+
             const cliente = await ClienteService.findAndUpdate(req.params.id, req.body);
 
             return res.status(200).send({ data: cliente });
