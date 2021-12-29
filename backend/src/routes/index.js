@@ -45,4 +45,15 @@ routes.put('/:id', async (req, res) => {
     }
 });
 
+routes.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const response = await ClienteController.destroy(id);
+
+        return res.status(200).send({ message: response });
+    } catch (error) {
+        return res.status(500).send({ error: error.message });
+    }
+});
+
 module.exports = routes;
