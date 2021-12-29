@@ -13,7 +13,13 @@ class ClienteController {
     }
 
     async index() {
+        try {
+            const clientes = await ClienteService.findAll();
 
+            return clientes;
+        } catch (error) {
+            throw error;
+        }
     }
 
     async show() {
