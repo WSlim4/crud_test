@@ -11,7 +11,7 @@ class App {
         this.routes();
 
         this.express.listen(PORT, () => {
-            console.log("Api running on port " + PORT);
+            console.log("Api rodando na porta " + PORT);
         })
     }
 
