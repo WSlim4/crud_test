@@ -1,9 +1,12 @@
 const { Router } = require('express');
+const ClienteController = require('../controllers/ClienteController');
 const routes = Router();
 
-routes.get('/', (req, res) => {
+routes.get('/', async (req, res) => {
     try {
-        return res.status(200).send({ message: 'Api running' });
+        const response = await ClienteController.create(req.body);
+
+        return res.status(200).send({ data: response });
     } catch (error) {
         return res.status(500).send({ error: error.message });
     }
