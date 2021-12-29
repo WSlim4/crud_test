@@ -42,6 +42,16 @@ class ClienteService {
             throw error;
         }
     }
+
+    async findAndDelete(id) {
+        try {
+            await Cliente.deleteOne({ id: id });
+
+            return 'Cliente deletado!'
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new ClienteService;
