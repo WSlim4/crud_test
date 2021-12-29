@@ -11,7 +11,8 @@ const ClienteSchema = new Schema({
         bairro: String,
         cidade: String,
         numero: Number
-    }
+    },
+    dataCriacao: { type: Date, default: Date.now },
 });
 
 const Cliente = mongoose.model('Cliente', ClienteSchema);
