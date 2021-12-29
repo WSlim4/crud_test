@@ -2,16 +2,6 @@ const ClienteService = require('../services/ClienteService');
 
 class ClienteController {
 
-    async create(data) {
-        try {
-            const cliente = await ClienteService.save(data);
-
-            return cliente;
-        } catch (error) {
-            throw error;
-        }
-    }
-
     async index() {
         try {
             const clientes = await ClienteService.findAll();
@@ -32,9 +22,11 @@ class ClienteController {
         }
     }
 
-    async destroy(id) {
+    async create(data) {
         try {
-            return await ClienteService.findAndDelete(id);
+            const cliente = await ClienteService.save(data);
+
+            return cliente;
         } catch (error) {
             throw error;
         }
@@ -45,6 +37,14 @@ class ClienteController {
             const cliente = await ClienteService.findAndUpdate(id, data);
 
             return cliente;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async destroy(id) {
+        try {
+            return await ClienteService.findAndDelete(id);
         } catch (error) {
             throw error;
         }
