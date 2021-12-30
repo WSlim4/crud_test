@@ -9,11 +9,11 @@ export default function Main() {
     return (
         <Container>
             <Content>
-                <div>
+                <div className="content">
 
                     <Tooltip title="Adicionar">
                         <IconButton>
-                            <AddIcon />
+                            <AddIcon style={{ color: '#1d1e4e' }} />
                         </IconButton>
                     </Tooltip>
 

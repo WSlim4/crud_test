@@ -15,10 +15,19 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
 
-    border: 0.4px solid gray;
+    border: 0.4px solid #1d1e4e;
+
+    background-color: #e5bd1a;
+
+    .content {
+        background-color: white;
+        border-radius: 5px;
+        overflow: auto;
+        padding: 2%;
+    }
 
     border-radius: 8px;
-    overflow: auto;
+   
 `
 
 export { Container, Content };
