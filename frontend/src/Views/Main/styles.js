@@ -19,17 +19,24 @@ const Content = styled.div`
 
     background-color: #e5bd1a;
 
+    width: 100%;
+
     .content {
         background-color: white;
         border-radius: 5px;
         
         padding: 2%;
-        width: 100%;
+        width: inherit;
     }
 
     .table-wrapper {
         overflow: auto;
         height: 50vh;
+        width: 100%;
+    }
+
+    table { 
+        width: 100%;
     }
 
     td {
