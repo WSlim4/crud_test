@@ -1,16 +1,17 @@
 import React from "react";
 import { BorderColor, Delete } from '@mui/icons-material';
 import { Tooltip, IconButton } from '@mui/material';
+import { TableHead } from './styles';
 
 export default function Table({ heads, users, colSpan }) {
     return (
-        <table style={{ marginTop: 10 }} cellpadding={`${colSpan}`}>
-            <tr>
+        <table style={{ width: '100%', marginTop: 10 }} cellpadding={`${colSpan}`}>
+            <TableHead>
                 {heads.map((head, i) => <th key={i} style={{ textAlign: i === 0 ? 'left' : 'center' }}>{head}</th>)}
                 <th>
                     Ações
                 </th>
-            </tr>
+            </TableHead>
             {users.map(user =>
             (
                 <tr key={user.id}>
@@ -28,17 +29,15 @@ export default function Table({ heads, users, colSpan }) {
                     </td>
                     <td>
                         <div style={{ display: 'flex' }}>
-
                             <Tooltip title="Editar">
                                 <IconButton>
-                                    <BorderColor />
+                                    <BorderColor style={{ color: '#1d1e4e' }} />
                                 </IconButton>
                             </Tooltip>
-
                             <div style={{ marginLeft: 8 }}>
                                 <Tooltip title="Deletar">
                                     <IconButton>
-                                        <Delete />
+                                        <Delete style={{ color: '#1d1e4e' }} />
                                     </IconButton>
                                 </Tooltip>
                             </div>
