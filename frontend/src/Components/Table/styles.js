@@ -8,4 +8,14 @@ const TableHead = styled.tr`
     font-family: 'Spline Sans', sans-serif;
 `
 
-export { TableHead };
+const TableRow = styled.tr`
+    .button-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+`
+
+export { TableHead, TableRow };

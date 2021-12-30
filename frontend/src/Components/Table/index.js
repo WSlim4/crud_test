@@ -1,7 +1,7 @@
 import React from "react";
-import { BorderColor, Delete } from '@mui/icons-material';
+import { BorderColor, Delete, Info } from '@mui/icons-material';
 import { Tooltip, IconButton } from '@mui/material';
-import { TableHead } from './styles';
+import { TableHead, TableRow } from './styles';
 
 export default function Table({ heads, users, colSpan }) {
     return (
@@ -14,7 +14,7 @@ export default function Table({ heads, users, colSpan }) {
             </TableHead>
             {users.map(user =>
             (
-                <tr key={user.id}>
+                <TableRow key={user.id}>
                     <td>
                         {user.nome}
                     </td>
@@ -27,24 +27,28 @@ export default function Table({ heads, users, colSpan }) {
                     <td>
                         {user.celular}
                     </td>
-                    <td>
-                        <div style={{ display: 'flex' }}>
-                            <Tooltip title="Editar">
-                                <IconButton>
-                                    <BorderColor style={{ color: '#1d1e4e' }} />
-                                </IconButton>
-                            </Tooltip>
-                            <div style={{ marginLeft: 8 }}>
-                                <Tooltip title="Deletar">
-                                    <IconButton>
-                                        <Delete style={{ color: '#1d1e4e' }} />
-                                    </IconButton>
-                                </Tooltip>
-                            </div>
+                    <td className="button-group">
 
-                        </div>
+                        <Tooltip title="Editar">
+                            <IconButton>
+                                <BorderColor style={{ color: '#1d1e4e' }} />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Deletar">
+                            <IconButton>
+                                <Delete style={{ color: '#1d1e4e' }} />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Visualizar">
+                            <IconButton>
+                                <Info style={{ color: '#1d1e4e' }} />
+                            </IconButton>
+                        </Tooltip>
+
                     </td>
-                </tr>
+                </TableRow>
             )
             )}
         </table>
