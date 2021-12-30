@@ -10,6 +10,16 @@ class ClienteService {
             throw error;
         }
     }
+
+    async remove(id) {
+        try {
+            const response = await api.delete(`/clientes/${id}`);
+
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default new ClienteService;
