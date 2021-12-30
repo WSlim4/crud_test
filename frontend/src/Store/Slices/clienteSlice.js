@@ -4,6 +4,7 @@ export const clienteSlice = createSlice({
     name: 'clientes',
     initialState: {
         value: [],
+        current: {},
         isLoading: false,
         hasError: false
     },
@@ -17,9 +18,15 @@ export const clienteSlice = createSlice({
         setError: (state, action) => {
             state.hasError = action.payload;
         },
+        setCurrent: (state, action) => {
+            state.current = action.payload;
+        },
+        removeCliente: (state, action) => {
+            state.value = state.value.filter((value, i) => i !== action.payload)
+        }
     },
 })
 
-export const { setClientes, setLoading, setError } = clienteSlice.actions
+export const { setClientes, setLoading, setError, setCurrent, closeDialog, removeCliente } = clienteSlice.actions
 
 export default clienteSlice.reducer
