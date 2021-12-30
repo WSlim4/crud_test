@@ -22,8 +22,25 @@ const Content = styled.div`
     .content {
         background-color: white;
         border-radius: 5px;
-        overflow: auto;
+        
         padding: 2%;
+        width: 100%;
+    }
+
+    .table-wrapper {
+        overflow: auto;
+        height: 50vh;
+    }
+
+    td {
+            font-family: 'Nanum Gothic', sans-serif;
+
+    font-family: 'Spline Sans', sans-serif;
+    font-size: 13px;
+    }
+
+    table, tr, td  {
+        border-bottom: 1px solid #ddd;
     }
 
     border-radius: 8px;

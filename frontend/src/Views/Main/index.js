@@ -17,11 +17,13 @@ export default function Main() {
                         </IconButton>
                     </Tooltip>
 
-                    <Table
-                        heads={['Nome', 'Cpf', 'E-mail', 'Celular']}
-                        users={mock.data}
-                        colSpan={10}
-                    />
+                    <div className="table-wrapper">
+                        <Table
+                            heads={['Nome', 'Cpf', 'E-mail', 'Celular']}
+                            users={mock.data}
+                            colSpan={10}
+                        />
+                    </div>
                 </div>
             </Content>
         </Container>
