@@ -35,7 +35,7 @@ class ClienteService {
 
     async findAndUpdate(id, data) {
         try {
-            const cliente = await Cliente.findOneAndUpdate({ id: id }, data);
+            const cliente = await Cliente.findOneAndUpdate({ _id: id }, data);
 
             return await this.findOne(cliente.id);
         } catch (error) {
@@ -45,7 +45,8 @@ class ClienteService {
 
     async findAndDelete(id) {
         try {
-            await Cliente.deleteOne({ id: id });
+
+            await Cliente.deleteOne({ _id: id });
 
             return 'Cliente deletado!'
         } catch (error) {
