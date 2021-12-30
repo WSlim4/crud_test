@@ -5,7 +5,7 @@ class ClienteService {
         try {
             const response = await api.get('/clientes');
 
-            return response.data;
+            return response.data.data;
         } catch (error) {
             throw error;
         }
