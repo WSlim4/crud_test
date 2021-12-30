@@ -2,17 +2,24 @@ import React from "react";
 import { BorderColor, Delete, Info } from '@mui/icons-material';
 import { Tooltip, IconButton } from '@mui/material';
 import { TableHead, TableRow } from './styles';
+import TableLoading from "../TableLoading";
 
-export default function Table({ heads, users, colSpan }) {
+export default function Table({ isLoading, hasError, heads, users, colSpan }) {
     return (
-        <table cellpadding={`${colSpan}`}>
+        <table cellPadding={`${colSpan}`}>
             <TableHead>
-                {heads.map((head, i) => <th key={i} style={{ textAlign: i === 0 ? 'left' : 'center' }}>{head}</th>)}
+                {heads.map((head, i) =>
+                    <th key={i} style={{ textAlign: i === 0 ? 'left' : 'center' }}>{head}</th>)}
                 <th>
                     Ações
                 </th>
+
             </TableHead>
-            {users.map(user =>
+
+            {isLoading === true && hasError === false && (
+                <TableLoading />
+            )}
+            {isLoading === false && hasError === false && users && users.map(user =>
             (
                 <TableRow key={user.id}>
                     <td>
@@ -51,6 +58,7 @@ export default function Table({ heads, users, colSpan }) {
                 </TableRow>
             )
             )}
+
         </table>
     )
 }

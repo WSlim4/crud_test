@@ -33,17 +33,25 @@ const Content = styled.div`
         overflow: auto;
         height: 50vh;
         width: 100%;
+
+        .empty-clients {
+            padding-top: 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
     }
 
     table { 
         width: 100%;
     }
 
-    td {
-            font-family: 'Nanum Gothic', sans-serif;
+    td, .empty-clients  {
+        font-family: 'Nanum Gothic', sans-serif;
 
-    font-family: 'Spline Sans', sans-serif;
-    font-size: 13px;
+        font-family: 'Spline Sans', sans-serif;
+        font-size: 13px;
     }
 
     table, tr, td  {
