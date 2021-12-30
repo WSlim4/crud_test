@@ -1,28 +1,21 @@
 import React from "react";
-import { Dialog, DialogTitle, TextField, DialogContent } from '@mui/material';
+import { useSelector } from "react-redux";
+import { Dialog } from '@mui/material';
+import DisplayInfo from "../DisplayInfo";
+import DisplayForm from "../DisplayForm";
 import './styles.css';
 
-export default function DialogComponent({ open, operation }) {
+export default function DialogComponent({ handleClose, open, operation }) {
+    const user = useSelector((state) => state.clientes.current);
+
+    const components = {
+        info: <DisplayInfo user={user} />,
+        add: <DisplayForm />
+    }
 
     return (
-        <Dialog open={open}>
-            <DialogTitle>
-                Cadastrar cliente
-            </DialogTitle>
-            <DialogContent style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                    <TextField placeholder="Nome" variant="outlined" />
-                    <TextField placeholder="Cpf" variant="outlined" />
-                    <TextField placeholder="Celular" variant="outlined" />
-                    <TextField placeholder="E-mail" variant="outlined" />
-                </div>
-                <div>
-                    <TextField placeholder="UF" variant="outlined" />
-                    <TextField placeholder="Rua" variant="outlined" />
-                    <TextField placeholder="Bairro" variant="outlined" />
-                    <TextField placeholder="Cidade" variant="outlined" />
-                </div>
-            </DialogContent>
+        <Dialog onClose={handleClose} open={open}>
+            {components[operation]}
         </Dialog>
     )
 }
