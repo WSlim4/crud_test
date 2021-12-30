@@ -5,7 +5,7 @@ import { TableHead } from './styles';
 
 export default function Table({ heads, users, colSpan }) {
     return (
-        <table style={{ width: '100%', marginTop: 10 }} cellpadding={`${colSpan}`}>
+        <table cellpadding={`${colSpan}`}>
             <TableHead>
                 {heads.map((head, i) => <th key={i} style={{ textAlign: i === 0 ? 'left' : 'center' }}>{head}</th>)}
                 <th>
