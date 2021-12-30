@@ -4,7 +4,7 @@ import { Tooltip, IconButton } from '@mui/material';
 import { TableHead, TableRow } from './styles';
 import TableLoading from "../TableLoading";
 
-export default function Table({ isLoading, hasError, heads, users, colSpan }) {
+export default function Table({ handleDelete, handleInfo, isLoading, hasError, heads, users, colSpan }) {
     return (
         <table cellPadding={`${colSpan}`}>
             <TableHead>
@@ -19,7 +19,7 @@ export default function Table({ isLoading, hasError, heads, users, colSpan }) {
             {isLoading === true && hasError === false && (
                 <TableLoading />
             )}
-            {isLoading === false && hasError === false && users && users.map(user =>
+            {isLoading === false && hasError === false && users && users.map((user, i) =>
             (
                 <TableRow key={user.id}>
                     <td>
@@ -49,7 +49,7 @@ export default function Table({ isLoading, hasError, heads, users, colSpan }) {
                         </Tooltip>
 
                         <Tooltip title="Visualizar">
-                            <IconButton>
+                            <IconButton onClick={() => handleInfo(user)}>
                                 <Info style={{ color: '#1d1e4e' }} />
                             </IconButton>
                         </Tooltip>
