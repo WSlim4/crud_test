@@ -5,14 +5,20 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    padding: 15% 8% 5% 8%;
+    padding: 10% 8% 5% 8%;
 `
 
 const Content = styled.div`
-    width: 100%;
     padding: 2%;
 
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0.4px solid gray;
+
+    border-radius: 8px;
+    overflow: auto;
 `
 
 export { Container, Content };
