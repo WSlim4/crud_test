@@ -43,7 +43,7 @@ export default function Table({ handleDelete, handleInfo, isLoading, hasError, h
                         </Tooltip>
 
                         <Tooltip title="Deletar">
-                            <IconButton>
+                            <IconButton onClick={() => handleDelete(user._id, i)}>
                                 <Delete style={{ color: '#1d1e4e' }} />
                             </IconButton>
                         </Tooltip>

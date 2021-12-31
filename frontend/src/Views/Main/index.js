@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Table from "../../Components/Table";
 import Dialog from '../../Components/Dialog';
 import ClienteOperations from '../../Operations/ClienteOperations';
+import Swal from 'sweetalert2';
 
 export default function Main() {
 
@@ -22,10 +23,10 @@ export default function Main() {
 
     const fetchData = () => dispatch(ClienteOperations.getClientes());
 
-    const handleInfo = (id, i) => {
+    const handleInfo = (user) => {
         setOperation("info");
         setOpen(true);
-        dispatch(ClienteOperations.showCliente(id, i))
+        dispatch(ClienteOperations.showCliente(user))
     };
 
     const handleClose = () => setOpen(false);
@@ -33,6 +34,21 @@ export default function Main() {
     const handleAdd = () => {
         setOperation("add");
         setOpen(true);
+    }
+
+    const handleDelete = (id, i) => {
+        Swal.fire({
+            title: 'Deseja mesmo deletar este usuário?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Sim',
+            denyButtonText: `Não`,
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                await dispatch(ClienteOperations.deleteCliente(id, i));
+                Swal.fire('Deletado!', '', 'success')
+            }
+          })
     }
 
     return (
@@ -53,6 +69,7 @@ export default function Main() {
 
                     <div className="table-wrapper">
                         <Table
+                            handleDelete={handleDelete}
                             handleInfo={handleInfo}
                             isLoading={isLoading}
                             hasError={hasError}

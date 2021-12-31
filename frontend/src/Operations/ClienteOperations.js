@@ -22,7 +22,7 @@ const ClienteOperations = {
         try {
             const data = await ClienteService.remove(id);
 
-            if (data && data.data !== null) {
+            if (data && data.message !== null) {
                 dispatch(removeCliente(i));
             }
 
