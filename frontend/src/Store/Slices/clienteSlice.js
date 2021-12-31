@@ -23,10 +23,20 @@ export const clienteSlice = createSlice({
         },
         removeCliente: (state, action) => {
             state.value = state.value.filter((value, i) => i !== action.payload)
+        },
+        addCliente: (state, action) => {
+            state.value.push(action.payload)
         }
     },
 })
 
-export const { setClientes, setLoading, setError, setCurrent, closeDialog, removeCliente } = clienteSlice.actions
+export const { 
+    setClientes, 
+    setLoading, 
+    setError, 
+    setCurrent, 
+    addCliente, 
+    removeCliente 
+} = clienteSlice.actions
 
 export default clienteSlice.reducer

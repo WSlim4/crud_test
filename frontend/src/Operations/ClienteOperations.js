@@ -1,12 +1,19 @@
 import ClienteService from "../Service/ClienteService";
-import { setClientes, setLoading, setError, setCurrent, removeCliente } from "../Store/Slices/clienteSlice";
+import { 
+    setClientes, 
+    setLoading, 
+    setError, 
+    setCurrent, 
+    removeCliente, 
+    addCliente 
+} from "../Store/Slices/clienteSlice";
 
 const ClienteOperations = {
     getClientes: () => async dispatch => {
         try {
             dispatch(setError(false));
             dispatch(setLoading(true));
-            const data = await ClienteService.getClientes();
+            const data = await ClienteService.getAll();
             dispatch(setClientes(data));
             dispatch(setLoading(false));
         } catch (error) {
@@ -30,6 +37,17 @@ const ClienteOperations = {
             console.log("Error", error);
         }
 
+    },
+
+    saveCliente: (data) => async dispatch => {
+        try {
+            const cliente = await ClienteService.save(data);
+            console.log("CLIENTE", cliente);
+            dispatch(addCliente(cliente))
+
+        } catch (error) {
+            console.log("Error", error);
+        }
     }
 
 }

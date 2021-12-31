@@ -1,7 +1,7 @@
 import api from '../Api';
 
 class ClienteService {
-    async getClientes() {
+    async getAll() {
         try {
             const response = await api.get('/clientes');
 
@@ -16,6 +16,16 @@ class ClienteService {
             const response = await api.delete(`/clientes/${id}`);
 
             return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async save(data) {
+        try {
+            const response = await api.post('/clientes', data);
+
+            return response.data.data;
         } catch (error) {
             throw error;
         }

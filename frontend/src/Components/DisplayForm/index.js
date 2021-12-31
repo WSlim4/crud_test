@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-
+import { useDispatch } from 'react-redux';
 import { DialogTitle, DialogContent, TextField } from '@mui/material';
+import ClienteOperations from "../../Operations/ClienteOperations";
 import './styles.css';
 
 export default function DisplayForm() {
+    const dispatch = useDispatch();
+
     const [userData, setUserData] = useState({
         nome: "",
         cpf: "",
@@ -34,7 +37,7 @@ export default function DisplayForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("userData", userData);
+        dispatch(ClienteOperations.saveCliente(userData));
     }
 
     return (
