@@ -15,24 +15,26 @@ export default function Main() {
     const [dialogOpen, setOpen] = useState(false);
     const [dialogOperation, setOperation] = useState("");
 
-    const { value: clientes, isLoading, hasError, current } = useSelector((state) => state.clientes);
+    const { value: clientes, isLoading, hasError } = useSelector((state) => state.clientes);
 
     useEffect(() => {
         fetchData();
     }, []);
 
-    const fetchData = () => dispatch(ClienteOperations.getClientes());
-
-    const handleInfo = (user) => {
-        setOperation("info");
-        setOpen(true);
-        dispatch(ClienteOperations.showCliente(user))
+    const fetchData = () =>  {
+        setOpen(false);
+        dispatch(ClienteOperations.getClientes())
     };
 
     const handleClose = () => setOpen(false);
 
-    const handleAdd = () => {
-        setOperation("add");
+    const handleActions = (action, user = null) => {
+        setOperation(action);
+
+        if(user) {
+            dispatch(ClienteOperations.showCliente(user));
+        }
+
         setOpen(true);
     }
 
@@ -54,6 +56,7 @@ export default function Main() {
     return (
         <Container>
             <Dialog
+                fetchData={fetchData}
                 handleClose={handleClose}
                 operation={dialogOperation}
                 open={dialogOpen}
@@ -62,7 +65,7 @@ export default function Main() {
                 <div className="content">
 
                     <Tooltip title="Adicionar">
-                        <IconButton onClick={() => handleAdd()}>
+                        <IconButton onClick={() => handleActions("add")}>
                             <AddIcon style={{ color: '#1d1e4e' }} />
                         </IconButton>
                     </Tooltip>
@@ -70,7 +73,7 @@ export default function Main() {
                     <div className="table-wrapper">
                         <Table
                             handleDelete={handleDelete}
-                            handleInfo={handleInfo}
+                            handleActions={handleActions}
                             isLoading={isLoading}
                             hasError={hasError}
                             heads={['Nome', 'Cpf', 'E-mail', 'Celular']}
