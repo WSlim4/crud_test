@@ -30,6 +30,16 @@ class ClienteService {
             throw error;
         }
     }
+
+    async update(id, user) {
+        try {
+            const response = await api.put(`/clientes/${id}`, user);
+
+            return response.data.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default new ClienteService;
