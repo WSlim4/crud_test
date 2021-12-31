@@ -4,7 +4,7 @@ import { Tooltip, IconButton } from '@mui/material';
 import { TableHead, TableRow } from './styles';
 import TableLoading from "../TableLoading";
 
-export default function Table({ handleDelete, handleInfo, isLoading, hasError, heads, users, colSpan }) {
+export default function Table({ handleDelete, handleActions, isLoading, hasError, heads, users, colSpan }) {
     return (
         <table cellPadding={`${colSpan}`}>
             <TableHead>
@@ -37,7 +37,7 @@ export default function Table({ handleDelete, handleInfo, isLoading, hasError, h
                     <td className="button-group">
 
                         <Tooltip title="Editar">
-                            <IconButton>
+                            <IconButton onClick={() => handleActions("edit", user)}>
                                 <BorderColor style={{ color: '#1d1e4e' }} />
                             </IconButton>
                         </Tooltip>
@@ -49,7 +49,7 @@ export default function Table({ handleDelete, handleInfo, isLoading, hasError, h
                         </Tooltip>
 
                         <Tooltip title="Visualizar">
-                            <IconButton onClick={() => handleInfo(user)}>
+                            <IconButton onClick={() => handleActions("show", user)}>
                                 <Info style={{ color: '#1d1e4e' }} />
                             </IconButton>
                         </Tooltip>
