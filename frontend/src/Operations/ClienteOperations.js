@@ -4,8 +4,7 @@ import {
     setLoading, 
     setError, 
     setCurrent, 
-    removeCliente, 
-    addCliente 
+    removeCliente
 } from "../Store/Slices/clienteSlice";
 
 const ClienteOperations = {
@@ -39,12 +38,19 @@ const ClienteOperations = {
 
     },
 
-    saveCliente: (data) => async dispatch => {
+    saveCliente: async (data) => {
         try {
-            const cliente = await ClienteService.save(data);
-            console.log("CLIENTE", cliente);
-            dispatch(addCliente(cliente))
+            await ClienteService.save(data);
 
+        } catch (error) {
+            console.log("Error", error);
+        }
+    },
+
+    updateCliente: async (data) => {
+        try {
+            await ClienteService.update(data._id, data);
+            
         } catch (error) {
             console.log("Error", error);
         }
