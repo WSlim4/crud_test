@@ -1,0 +1,31 @@
+.dialog {
+
+
+    padding: 20px 54px !important;
+}
+
+form {
+    text-align: center;
+}
+
+form button {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: #1d1e4e;
+    border-radius: 8px;
+    color: #e5bd1a;
+    width: 24%;
+    font-weight: 600;
+}
+
+form button:hover {
+    cursor: pointer;
+    background-color: #e5bd1a;
+    color: #1d1e4e;
+    transition: all 0.8s;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
