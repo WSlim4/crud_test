@@ -21,7 +21,7 @@ export default function Table({ handleDelete, handleInfo, isLoading, hasError, h
             )}
             {isLoading === false && hasError === false && users && users.map((user, i) =>
             (
-                <TableRow key={user.id}>
+                <TableRow key={user._id}>
                     <td>
                         {user.nome}
                     </td>
