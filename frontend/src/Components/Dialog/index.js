@@ -5,12 +5,13 @@ import DisplayInfo from "../DisplayInfo";
 import DisplayForm from "../DisplayForm";
 import './styles.css';
 
-export default function DialogComponent({ handleClose, open, operation }) {
+export default function DialogComponent({ fetchData, handleClose, open, operation }) {
     const user = useSelector((state) => state.clientes.current);
 
     const components = {
-        info: <DisplayInfo user={user} />,
-        add: <DisplayForm />
+        show: <DisplayInfo user={user} />,
+        add: <DisplayForm fetchData={fetchData} />,
+        edit: <DisplayForm fetchData={fetchData} defaultUser={user} />
     }
 
     return (
