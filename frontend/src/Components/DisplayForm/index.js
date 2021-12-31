@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { useDispatch } from 'react-redux';
 import { DialogTitle, DialogContent, TextField } from '@mui/material';
 import ClienteOperations from "../../Operations/ClienteOperations";
 import './styles.css';
 
-export default function DisplayForm() {
+export default function DisplayForm({ fetchData, defaultUser = null }) {
     const dispatch = useDispatch();
 
     const [userData, setUserData] = useState({
@@ -19,6 +19,12 @@ export default function DisplayForm() {
             cidade: ""
         }
     });
+
+    useEffect(() => {
+        if(defaultUser) {
+            setUserData(defaultUser)
+        }
+    }, [])
 
     const handleChange = (e) => {
         let { value, name} = e.target;
@@ -35,15 +41,23 @@ export default function DisplayForm() {
 
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(ClienteOperations.saveCliente(userData));
+
+        if(defaultUser) {
+            await ClienteOperations.updateCliente(userData);
+        } else {
+            await ClienteOperations.saveCliente(userData);
+        }
+
+        fetchData();
+       
     }
 
     return (
         <>
             <DialogTitle>
-                Cadastrar cliente
+                {defaultUser ? "Atualizar" : "Cadastrar"} cliente
             </DialogTitle>
             <DialogContent className="dialog">
                 <form onSubmit={handleSubmit}>
@@ -61,7 +75,7 @@ export default function DisplayForm() {
                         <TextField placeholder="Cidade" name="endereco.cidade" value={userData.endereco.cidade} variant="outlined" onChange={handleChange}/>
                     </div>
                     </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit">{defaultUser ? "Atualizar" : "Salvar"}</button>
                 </form>
                 
             </DialogContent>
