@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Content } from "./styles";
 import { IconButton, Tooltip, Pagination } from '@mui/material';
+import Swal from 'sweetalert2';
 import AddIcon from '@mui/icons-material/Add';
 import Table from "../../Components/Table";
 import Dialog from '../../Components/Dialog';
 import ClienteOperations from '../../Operations/ClienteOperations';
-import Swal from 'sweetalert2';
+import Retry from "../../Components/Retry";
 
 export default function Main() {
 
@@ -89,17 +90,24 @@ export default function Main() {
                             isLoading === false &&
                             hasError === false &&
                             clientes &&
-                            clientes.length === 0 && (
+                            clientes.docs.length === 0 && (
                                 <div className="empty-clients">
                                     Nenhum cliente encontrado
                                 </div>
                             )}
+                        {
+                            isLoading === false && hasError === true && (
+                                <div className="retry">
+                                    <Retry fetchFunc={fetchData} page={clientes.page? clientes.page : 1} />
+                                </div>
+                            )
+                        }
                     </div>
-
-                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                        <Pagination page={page} onChange={handleChange} count={clientes && clientes.totalPages ? clientes.totalPages : 1 } />
-                    </div>
-                    
+                        {isLoading === false && hasError === false && clientes.docs.length !== 0 && (
+                            <div className="pagination-footer">
+                                <Pagination page={page} onChange={handleChange} count={clientes && clientes.totalPages ? clientes.totalPages : 1 } />
+                            </div>
+                        )}
                 </div>
             </Content>
         </Container>

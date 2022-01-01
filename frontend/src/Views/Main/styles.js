@@ -27,6 +27,14 @@ const Content = styled.div`
         
         padding: 2%;
         width: inherit;
+
+        .retry, .pagination-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
     }
 
     .table-wrapper {
