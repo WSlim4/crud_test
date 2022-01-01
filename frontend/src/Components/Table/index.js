@@ -15,7 +15,7 @@ export default function Table({ handleDelete, handleActions, isLoading, hasError
                             {head.toUpperCase()}</th>
                     )}
                 <th>
-                    Ações
+                    AÇÕES
                 </th>
 
             </TableHead>
