@@ -5,19 +5,19 @@ export default function TableLoading() {
     return (
         <tr>
             <td>
-                <Skeleton variant="rectangular" width={200} height={20} />
+                <Skeleton variant="rectangular" width={160} height={20} />
             </td>
             <td>
-                <Skeleton variant="rectangular" width={200} height={20} />
+                <Skeleton variant="rectangular" width={160} height={20} />
             </td>
             <td>
-                <Skeleton variant="rectangular" width={200} height={20} />
+                <Skeleton variant="rectangular" width={160} height={20} />
             </td>
             <td>
-                <Skeleton variant="rectangular" width={200} height={20} />
+                <Skeleton variant="rectangular" width={160} height={20} />
             </td>
             <td>
-                <Skeleton variant="rectangular" width={200} height={20} />
+                <Skeleton variant="rectangular" width={160} height={20} />
             </td>
         </tr>
     )
