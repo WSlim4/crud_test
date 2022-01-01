@@ -13,9 +13,21 @@ class ClienteService {
         }
     }
 
-    async findAll() {
+    async findAll(page = 1) {
         try {
-            const clientes = await Cliente.find({});
+            
+            const options = {
+                page: page,
+                limit: 10,
+                collation: {
+                  locale: 'en',
+                },
+              };
+            
+
+            const clientes = await Cliente.paginate({}, options, function(err, result){
+                return result;
+            });
 
             return clientes;
         } catch (error) {

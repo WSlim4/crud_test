@@ -5,7 +5,7 @@ class ClienteController {
 
     async index(req, res) {
         try {
-            const clientes = await ClienteService.findAll();
+            const clientes = await ClienteService.findAll(req.params.page);
 
             return res.status(200).send({ data: clientes });
         } catch (error) {

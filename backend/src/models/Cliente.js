@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const ClienteSchema = new Schema({
     cpf: String,
@@ -10,11 +11,12 @@ const ClienteSchema = new Schema({
         rua: String,
         bairro: String,
         cidade: String,
-        uf: String,
         numero: Number
     },
     dataCriacao: { type: Date, default: Date.now },
 });
+
+ClienteSchema.plugin(mongoosePaginate);
 
 const Cliente = mongoose.model('Cliente', ClienteSchema);
 
