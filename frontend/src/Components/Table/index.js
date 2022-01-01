@@ -9,7 +9,11 @@ export default function Table({ handleDelete, handleActions, isLoading, hasError
         <table cellPadding={`${colSpan}`}>
             <TableHead>
                 {heads.map((head, i) =>
-                    <th key={i} style={{ textAlign: i === 0 ? 'left' : 'center' }}>{head}</th>)}
+                    <th 
+                        key={i} 
+                        style={{ textAlign: i === 0 ? 'left' : 'center' }}>
+                            {head.toUpperCase()}</th>
+                    )}
                 <th>
                     Ações
                 </th>
@@ -19,7 +23,12 @@ export default function Table({ handleDelete, handleActions, isLoading, hasError
             {isLoading === true && hasError === false && (
                 <TableLoading />
             )}
-            {isLoading === false && hasError === false && users && users.map((user, i) =>
+            {
+            isLoading === false && 
+            hasError === false && 
+            users && 
+            users.docs && 
+            users.docs.map((user, i) =>
             (
                 <TableRow key={user._id}>
                     <td>
