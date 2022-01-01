@@ -8,11 +8,11 @@ import {
 } from "../Store/Slices/clienteSlice";
 
 const ClienteOperations = {
-    getClientes: () => async dispatch => {
+    getClientes: (page) => async dispatch => {
         try {
             dispatch(setError(false));
             dispatch(setLoading(true));
-            const data = await ClienteService.getAll();
+            const data = await ClienteService.getAll(page);
             dispatch(setClientes(data));
             dispatch(setLoading(false));
         } catch (error) {

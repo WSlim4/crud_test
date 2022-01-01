@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Content } from "./styles";
-import { IconButton, Tooltip } from '@mui/material';
+import { IconButton, Tooltip, Pagination } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Table from "../../Components/Table";
 import Dialog from '../../Components/Dialog';
@@ -14,16 +14,17 @@ export default function Main() {
 
     const [dialogOpen, setOpen] = useState(false);
     const [dialogOperation, setOperation] = useState("");
+    const [page, setPage] = useState(1);
 
     const { value: clientes, isLoading, hasError } = useSelector((state) => state.clientes);
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData(page);
+    }, [page]);
 
-    const fetchData = () =>  {
+    const fetchData = (page) =>  {
         setOpen(false);
-        dispatch(ClienteOperations.getClientes())
+        dispatch(ClienteOperations.getClientes(page))
     };
 
     const handleClose = () => setOpen(false);
@@ -51,6 +52,10 @@ export default function Main() {
                 Swal.fire('Deletado!', '', 'success')
             }
           })
+    }
+
+    const handleChange = (event, value) => {
+        setPage(value);
     }
 
     return (
@@ -90,6 +95,11 @@ export default function Main() {
                                 </div>
                             )}
                     </div>
+
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <Pagination page={page} onChange={handleChange} count={clientes && clientes.totalPages ? clientes.totalPages : 1 } />
+                    </div>
+                    
                 </div>
             </Content>
         </Container>

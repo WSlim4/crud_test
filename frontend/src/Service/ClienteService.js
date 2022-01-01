@@ -1,9 +1,9 @@
 import api from '../Api';
 
 class ClienteService {
-    async getAll() {
+    async getAll(page = 1) {
         try {
-            const response = await api.get('/clientes');
+            const response = await api.get(`/clientes?page=${page}`);
 
             return response.data.data;
         } catch (error) {
