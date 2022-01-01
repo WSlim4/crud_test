@@ -3,10 +3,18 @@ import { useSelector } from 'react-redux';
 import InputMask from 'react-input-mask';
 import { DialogTitle, DialogContent, TextField, Input } from '@mui/material';
 import ClienteOperations from "../../Operations/ClienteOperations";
+import ClienteSchema from "../../Schemas/clienteSchema";
+import formatObject from "../../Utils/format_input";
 import './styles.css';
 
 export default function DisplayForm({ fetchData, defaultUser = null }) {
     const clientes = useSelector((state) => state.clientes.value);
+    
+    const [inputErrors, setErrors] = useState({
+        email: "",
+        nome: "",
+        'endereco.numero': ""
+    })
 
     const [userData, setUserData] = useState({
         nome: "",
@@ -25,15 +33,23 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
         if(defaultUser) {
             setUserData(defaultUser)
         }
-    }, [])
+    }, [defaultUser])
 
     const handleChange = (e) => {
         let { value, name} = e.target;
         let data = {...userData};
 
+        if(inputErrors[name]) {
+            let errors = {...inputErrors};
+            errors[name] = "";
+            setErrors(errors);
+        }
+
         if(name.includes('.')) {
             name = name.split('.');
-            data[name[0]][name[1]] = value
+            let endereco = {...data.endereco}
+            endereco[name[1]] = value;
+            data.endereco = endereco;
         } else { 
             data[name] = value;
         }
@@ -45,15 +61,30 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        /*if(defaultUser) {
-            await ClienteOperations.updateCliente(userData);
-        } else {
-            await ClienteOperations.saveCliente(userData);
-        }
+        const data = formatObject(userData);
 
-        fetchData(clientes.page);*/
-        console.log("USER_DATA", userData);
-       
+        ClienteSchema.validate(data, { abortEarly: false }).then(async function(valid) {
+
+            if(defaultUser) {
+                await ClienteOperations.updateCliente(data);
+            } else {
+                await ClienteOperations.saveCliente(data);
+            }
+    
+            fetchData(clientes.page);
+        }).catch(function (err) {
+            let errors = {...inputErrors};
+            err.inner.forEach(e => {
+                if(e.path === 'endereco.numero') {
+                    errors['endereco.numero'] = e.message;
+                } else {
+                    errors[e.path] = e.message;
+                }
+                console.log(e.message, e.path);
+            });
+           
+            setErrors(errors);
+        });
     }
 
     return (
@@ -67,7 +98,8 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                     <div>
                     
                         <TextField 
-                            placeholder="Nome" 
+                            required
+                            placeholder="Nome *" 
                             name="nome" 
                             value={userData.nome} 
                             variant="outlined" 
@@ -78,10 +110,10 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                             mask="(99)99999-9999" 
                             value={userData.celular} 
                             onChange={handleChange}>
-                            {() => <TextField placeholder="Celular" name="celular"  variant="outlined" />}
+                            {() => <TextField required placeholder="Celular *" name="celular"  variant="outlined" />}
                         </InputMask>
 
-                        <TextField 
+                        <TextField
                             placeholder="Rua" 
                             name="endereco.rua" 
                             value={userData.endereco.rua} 
@@ -100,18 +132,21 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                        
                     </div>
                     <div>
-                        <InputMask 
+                        <InputMask
                             mask="999.999.999-99" 
                             value={userData.cpf} 
                             onChange={handleChange}>
-                                {() => <TextField placeholder="Cpf" name="cpf" variant="outlined"/>}
+                                {() => <TextField required placeholder="Cpf *" name="cpf" variant="outlined"/>}
                         </InputMask>
-                        <TextField 
-                            placeholder="E-mail" 
+                        <TextField
+                            error={inputErrors.email !== ""}
+                            required
+                            placeholder="E-mail *" 
                             name="email" 
                             value={userData.email} 
                             variant="outlined" 
                             onChange={handleChange}
+                            helperText={inputErrors.email}
                         />
                         <TextField 
                             placeholder="Bairro" 
@@ -120,12 +155,14 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                             variant="outlined" 
                             onChange={handleChange}
                         />
-                        <TextField 
+                        <TextField
+                            error={inputErrors['endereco.numero'] !== ""}
                             placeholder="Número" 
                             name="endereco.numero" 
                             value={userData.endereco.numero} 
                             variant="outlined" 
                             onChange={handleChange}
+                            helperText={inputErrors['endereco.numero']}
                         />
                     </div>
                     </div>
