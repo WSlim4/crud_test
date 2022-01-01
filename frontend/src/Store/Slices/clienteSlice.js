@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 export const clienteSlice = createSlice({
     name: 'clientes',
     initialState: {
-        value: [],
+        value: {
+            docs: []
+        },
         current: {},
         isLoading: false,
         hasError: false
@@ -22,7 +24,7 @@ export const clienteSlice = createSlice({
             state.current = action.payload;
         },
         removeCliente: (state, action) => {
-            state.value = state.value.filter((value, i) => i !== action.payload)
+            state.value.docs = state.value.docs.filter((value, i) => i !== action.payload)
         }
     },
 })
