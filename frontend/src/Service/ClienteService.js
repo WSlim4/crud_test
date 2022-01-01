@@ -42,4 +42,4 @@ class ClienteService {
     }
 }
 
-export default new ClienteService;
+export default new ClienteService();
