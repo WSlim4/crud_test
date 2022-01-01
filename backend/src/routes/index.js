@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const ClienteController = require('../controllers/ClienteController');
-const clienteValidator = require('../validations/cliente');
+const ClienteController = require('../Controllers/ClienteController');
+const clienteValidator = require('../Validations/cliente');
 const routes = Router();
 
 routes.post('/', clienteValidator, ClienteController.create);

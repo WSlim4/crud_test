@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const ClienteSchema = new Schema({
-    cpf: String,
+    cpf: { type: String, unique: true},
     nome: String,
     email: String,
     celular: String,

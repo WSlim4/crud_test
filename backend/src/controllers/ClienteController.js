@@ -1,4 +1,4 @@
-const ClienteService = require('../services/ClienteService');
+const ClienteService = require('../Services/ClienteService');
 const { validationResult } = require('express-validator');
 
 class ClienteController {

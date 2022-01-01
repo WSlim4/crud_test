@@ -40,7 +40,7 @@ class App {
     }
 
     routes() {
-        this.express.use('/clientes', require("./routes"));
+        this.express.use('/clientes', require("./Routes"));
     }
 }
 
