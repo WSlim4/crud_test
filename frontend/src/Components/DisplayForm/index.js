@@ -1,11 +1,12 @@
-import React, { useState, useEffect  } from "react";
-import { useDispatch } from 'react-redux';
-import { DialogTitle, DialogContent, TextField } from '@mui/material';
+import React, { useState, useEffect, createRef  } from "react";
+import { useSelector } from 'react-redux';
+import InputMask from 'react-input-mask';
+import { DialogTitle, DialogContent, TextField, Input } from '@mui/material';
 import ClienteOperations from "../../Operations/ClienteOperations";
 import './styles.css';
 
 export default function DisplayForm({ fetchData, defaultUser = null }) {
-    const dispatch = useDispatch();
+    const clientes = useSelector((state) => state.clientes.value);
 
     const [userData, setUserData] = useState({
         nome: "",
@@ -44,13 +45,14 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(defaultUser) {
+        /*if(defaultUser) {
             await ClienteOperations.updateCliente(userData);
         } else {
             await ClienteOperations.saveCliente(userData);
         }
 
-        fetchData();
+        fetchData(clientes.page);*/
+        console.log("USER_DATA", userData);
        
     }
 
@@ -59,20 +61,72 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
             <DialogTitle>
                 {defaultUser ? "Atualizar" : "Cadastrar"} cliente
             </DialogTitle>
-            <DialogContent className="dialog">
+            <DialogContent ref={createRef()} className="dialog">
                 <form onSubmit={handleSubmit}>
                     <div className="inputs">
                     <div>
-                        <TextField placeholder="Nome" name="nome" value={userData.nome} variant="outlined" onChange={handleChange}/>
-                        <TextField placeholder="Cpf" name="cpf" value={userData.cpf} variant="outlined" onChange={handleChange}/>
-                        <TextField placeholder="Celular" name="celular" value={userData.celular} variant="outlined" onChange={handleChange}/>
-                        <TextField placeholder="E-mail" name="email" value={userData.email} variant="outlined" onChange={handleChange}/>
+                    
+                        <TextField 
+                            placeholder="Nome" 
+                            name="nome" 
+                            value={userData.nome} 
+                            variant="outlined" 
+                            onChange={handleChange}
+                        />
+
+                        <InputMask 
+                            mask="(99)99999-9999" 
+                            value={userData.celular} 
+                            onChange={handleChange}>
+                            {() => <TextField placeholder="Celular" name="celular"  variant="outlined" />}
+                        </InputMask>
+
+                        <TextField 
+                            placeholder="Rua" 
+                            name="endereco.rua" 
+                            value={userData.endereco.rua} 
+                            variant="outlined" 
+                            onChange={handleChange}
+                        />
+                        
+                        <TextField 
+                            placeholder="Cidade" 
+                            name="endereco.cidade" 
+                            value={userData.endereco.cidade} 
+                            variant="outlined" 
+                            onChange={handleChange}
+                        />
+                        
+                       
                     </div>
                     <div>
-                        <TextField placeholder="Número" name="endereco.numero" value={userData.endereco.numero} variant="outlined" onChange={handleChange}/>
-                        <TextField placeholder="Rua" name="endereco.rua" value={userData.endereco.rua} variant="outlined" onChange={handleChange}/>
-                        <TextField placeholder="Bairro" name="endereco.bairro" value={userData.endereco.bairro} variant="outlined" onChange={handleChange}/>
-                        <TextField placeholder="Cidade" name="endereco.cidade" value={userData.endereco.cidade} variant="outlined" onChange={handleChange}/>
+                        <InputMask 
+                            mask="999.999.999-99" 
+                            value={userData.cpf} 
+                            onChange={handleChange}>
+                                {() => <TextField placeholder="Cpf" name="cpf" variant="outlined"/>}
+                        </InputMask>
+                        <TextField 
+                            placeholder="E-mail" 
+                            name="email" 
+                            value={userData.email} 
+                            variant="outlined" 
+                            onChange={handleChange}
+                        />
+                        <TextField 
+                            placeholder="Bairro" 
+                            name="endereco.bairro" 
+                            value={userData.endereco.bairro} 
+                            variant="outlined" 
+                            onChange={handleChange}
+                        />
+                        <TextField 
+                            placeholder="Número" 
+                            name="endereco.numero" 
+                            value={userData.endereco.numero} 
+                            variant="outlined" 
+                            onChange={handleChange}
+                        />
                     </div>
                     </div>
                     <button type="submit">{defaultUser ? "Atualizar" : "Salvar"}</button>
