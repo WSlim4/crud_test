@@ -7,8 +7,6 @@ import {
     removeCliente
 } from "../Store/Slices/clienteSlice";
 
-import Swal from "sweetalert2";
-
 const ClienteOperations = {
     getClientes: (page) => async dispatch => {
         try {
