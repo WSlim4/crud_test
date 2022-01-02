@@ -72,12 +72,7 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
             if(defaultUser) {
                 await ClienteOperations.updateCliente(data);
             } else {
-                ClienteOperations.saveCliente(data).catch(err => {
-                    Swal.fire({
-                        title: 'Cpf já cadastrado!',
-                        icon: 'error'
-                    });
-                })
+                await ClienteOperations.saveCliente(data);
             }
     
             fetchData(clientes.page);
