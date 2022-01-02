@@ -7,6 +7,8 @@ import {
     removeCliente
 } from "../Store/Slices/clienteSlice";
 
+import Swal from "sweetalert2";
+
 const ClienteOperations = {
     getClientes: (page) => async dispatch => {
         try {
@@ -51,6 +53,10 @@ const ClienteOperations = {
 
         } catch (error) {
             console.log("Error", error);
+            Swal.fire({
+                title: 'Cpf já cadastrado!',
+                icon: 'error'
+            })
             throw error;
         }
     },

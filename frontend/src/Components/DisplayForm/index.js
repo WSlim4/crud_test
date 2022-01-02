@@ -72,16 +72,10 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
             if(defaultUser) {
                 await ClienteOperations.updateCliente(data);
             } else {
-                ClienteOperations.saveCliente(data).catch(err => {
-                    handleClose();
-                    /*Swal.fire({
-                        title: 'Cpf já cadastrado!',
-                        icon: 'error'
-                    });*/
-                });
+                await ClienteOperations.saveCliente(data);
             }
 
-            setSubmitting(false);
+            console.log("CHEGOU AQUI");
 
             fetchData(clientes.page);
         }).catch(function (err) {
@@ -92,7 +86,6 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
                 } else {
                     errors[e.path] = e.message;
                 }
-                console.log(e.message, e.path);
             });
            
             setSubmitting(false);
