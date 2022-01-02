@@ -1,8 +1,9 @@
-const Cliente = require('../models/Cliente');
+const Cliente = require('../Models/Cliente');
 
 class ClienteService {
     async save(cliente_obj) {
         try {
+
             const cliente = new Cliente(cliente_obj);
 
             await cliente.save();
@@ -47,6 +48,7 @@ class ClienteService {
 
     async findAndUpdate(id, data) {
         try {
+
             const cliente = await Cliente.findOneAndUpdate({ _id: id }, data);
 
             return await this.findOne(cliente.id);
