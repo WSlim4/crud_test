@@ -1,7 +1,8 @@
 import React, { useState, useEffect, createRef  } from "react";
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import InputMask from 'react-input-mask';
-import { DialogTitle, DialogContent, TextField, Input } from '@mui/material';
+import { DialogTitle, DialogContent, TextField } from '@mui/material';
 import ClienteOperations from "../../Operations/ClienteOperations";
 import ClienteSchema from "../../Schemas/clienteSchema";
 import formatObject from "../../Utils/format_input";
@@ -63,12 +64,18 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
 
         const data = formatObject(userData);
 
+
         ClienteSchema.validate(data, { abortEarly: false }).then(async function(valid) {
 
             if(defaultUser) {
                 await ClienteOperations.updateCliente(data);
             } else {
-                await ClienteOperations.saveCliente(data);
+                ClienteOperations.saveCliente(data).catch(err => {
+                    Swal.fire({
+                        title: 'Cpf já cadastrado!',
+                        icon: 'error'
+                    });
+                })
             }
     
             fetchData(clientes.page);
@@ -85,6 +92,7 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
            
             setErrors(errors);
         });
+
     }
 
     return (
@@ -114,6 +122,7 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                         </InputMask>
 
                         <TextField
+                            style={{marginTop: inputErrors.email !== "" ? 24 : 0}}
                             placeholder="Rua" 
                             name="endereco.rua" 
                             value={userData.endereco.rua} 
