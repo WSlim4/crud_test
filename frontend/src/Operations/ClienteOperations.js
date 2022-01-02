@@ -22,7 +22,14 @@ const ClienteOperations = {
         }
     },
 
-    showCliente: (user) => async dispatch => { dispatch(setCurrent(user)) },
+    showCliente: (user) => async dispatch => {
+        let _user = {...user};
+        let _endereco = {..._user.endereco};
+        _endereco.numero = _endereco.numero === 0 ? "" : _endereco.numero;
+        _user.endereco = _endereco;
+
+        dispatch(setCurrent(_user)) 
+    },
 
     deleteCliente: (id, i) => async dispatch => {
         try {
@@ -44,6 +51,7 @@ const ClienteOperations = {
 
         } catch (error) {
             console.log("Error", error);
+            throw error;
         }
     },
 
@@ -53,6 +61,8 @@ const ClienteOperations = {
             
         } catch (error) {
             console.log("Error", error);
+            throw error;
+            
         }
     }
 
