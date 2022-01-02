@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createRef  } from "react";
 import { useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
 import InputMask from 'react-input-mask';
 import { DialogTitle, DialogContent, TextField, CircularProgress } from '@mui/material';
 import ClienteOperations from "../../Operations/ClienteOperations";
