@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 import './styles.css';
 
 export default function DisplayForm({ handleClose, fetchData, defaultUser = null }) {
-    console.log("CHEGOU AQUI L-12")
     const clientes = useSelector((state) => state.clientes.value);
     
     const [isSubmitting, setSubmitting] = useState(false);
@@ -57,16 +56,14 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
         } else { 
             data[name] = value;
         }
-
         setUserData(data);
-
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitting(true);
-        const data = formatObject(userData);
 
+        const data = formatObject(userData);
 
         ClienteSchema.validate(data, { abortEarly: false }).then(async function(valid) {
 
@@ -80,7 +77,6 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
         }).catch(function (err) {
             
             if(err.inner) {
-                console.log("CHEGOU AQUI L-82")
                 let errors = {...inputErrors};
                 err.inner.forEach(e => {
                     if(e.path === 'endereco.numero') {
@@ -93,7 +89,6 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
                 setSubmitting(false);
                 setErrors(errors);
             } else {
-                console.log("CHEGOU AQUI L-95")
                 handleClose();
             }
             
