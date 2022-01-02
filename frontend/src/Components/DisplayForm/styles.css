@@ -1,6 +1,5 @@
 .dialog {
 
-
     padding: 20px 54px !important;
 }
 
@@ -28,4 +27,18 @@ form button:hover {
 .inputs {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+@media(max-width: 800px) {
+    form button {
+        width: 100%;
+    }
+
+    .inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .inputs div {
+        width: 100% !important;
+    }
 }
