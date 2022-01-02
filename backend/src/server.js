@@ -10,8 +10,8 @@ class App {
         this.middlewares();
         this.routes();
 
-        this.express.listen(PORT, () => {
-            console.log("Api rodando na porta " + PORT);
+        this.express.listen(process.env.PORT || PORT, () => {
+            console.log("Api rodando na porta " + process.env.PORT);
         })
     }
 
