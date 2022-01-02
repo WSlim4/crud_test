@@ -5,6 +5,7 @@ import { DialogTitle, DialogContent, TextField, CircularProgress } from '@mui/ma
 import ClienteOperations from "../../Operations/ClienteOperations";
 import ClienteSchema from "../../Schemas/clienteSchema";
 import formatObject from "../../Utils/format_input";
+import Swal from "sweetalert2";
 import './styles.css';
 
 export default function DisplayForm({ fetchData, defaultUser = null }) {
@@ -71,7 +72,14 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
             if(defaultUser) {
                 await ClienteOperations.updateCliente(data);
             } else {
-                await ClienteOperations.saveCliente(data);
+                ClienteOperations.saveCliente(data).then(result => {
+                    return result;
+                }).catch(err => {
+                    Swal.fire({
+                        title: 'Cpf já cadastrado!',
+                        icon: 'error'
+                    });
+                });
             }
     
             fetchData(clientes.page);

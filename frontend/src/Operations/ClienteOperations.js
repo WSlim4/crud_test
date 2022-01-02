@@ -53,10 +53,6 @@ const ClienteOperations = {
 
         } catch (error) {
             console.log("Error", error);
-            Swal.fire({
-                title: 'Cpf já cadastrado!',
-                icon: 'error'
-            });
             throw error;
         }
     },
