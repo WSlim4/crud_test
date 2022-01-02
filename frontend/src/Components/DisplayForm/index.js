@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef  } from "react";
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import InputMask from 'react-input-mask';
-import { DialogTitle, DialogContent, TextField } from '@mui/material';
+import { DialogTitle, DialogContent, TextField, CircularProgress } from '@mui/material';
 import ClienteOperations from "../../Operations/ClienteOperations";
 import ClienteSchema from "../../Schemas/clienteSchema";
 import formatObject from "../../Utils/format_input";
@@ -11,6 +11,8 @@ import './styles.css';
 export default function DisplayForm({ fetchData, defaultUser = null }) {
     const clientes = useSelector((state) => state.clientes.value);
     
+    const [isSubmitting, setSubmitting] = useState(false);
+
     const [inputErrors, setErrors] = useState({
         email: "",
         nome: "",
@@ -61,7 +63,7 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setSubmitting(true);
         const data = formatObject(userData);
 
 
@@ -90,8 +92,10 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                 console.log(e.message, e.path);
             });
            
+            setSubmitting(false);
             setErrors(errors);
         });
+        
 
     }
 
@@ -175,7 +179,12 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                         />
                     </div>
                     </div>
-                    <button type="submit">{defaultUser ? "Atualizar" : "Salvar"}</button>
+                    <button 
+                        type="submit"
+                        >
+                            {isSubmitting === true ? 
+                                <CircularProgress size={18}/> : defaultUser ? "Atualizar" : "Salvar"}
+                            </button>
                 </form>
                 
             </DialogContent>
