@@ -79,7 +79,7 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                         title: 'Cpf já cadastrado!',
                         icon: 'error'
                     });
-                });
+                }).then((res) => fetchData(clientes.page));
             }
     
             fetchData(clientes.page);
