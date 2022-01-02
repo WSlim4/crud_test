@@ -76,10 +76,10 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
                     return result;
                 }).catch(err => {
                     handleClose();
-                    Swal.fire({
+                    /*Swal.fire({
                         title: 'Cpf já cadastrado!',
                         icon: 'error'
-                    });
+                    });*/
                 });
             }
 
