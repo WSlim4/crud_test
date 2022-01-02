@@ -10,8 +10,8 @@ export default function DialogComponent({ fetchData, handleClose, open, operatio
 
     const components = {
         show: <DisplayInfo user={user} />,
-        add: <DisplayForm fetchData={fetchData} />,
-        edit: <DisplayForm fetchData={fetchData} defaultUser={user} />
+        add: <DisplayForm handleClose={handleClose} fetchData={fetchData} />,
+        edit: <DisplayForm handleClose={handleClose} fetchData={fetchData} defaultUser={user} />
     }
 
     return (
