@@ -72,7 +72,7 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
             if(defaultUser) {
                 await ClienteOperations.updateCliente(data);
             } else {
-                await ClienteOperations.saveCliente(data, fetchData(clientes.page));
+                await ClienteOperations.saveCliente(data);
             }
 
             console.log("CHEGOU AQUI");
