@@ -47,7 +47,7 @@ const ClienteOperations = {
 
     },
 
-    saveCliente: async (data, fetchFunc, page) => {
+    saveCliente: async (data) => {
         try {
             await ClienteService.save(data);
 
@@ -57,7 +57,7 @@ const ClienteOperations = {
                 title: 'Cpf já cadastrado!',
                 icon: 'error'
             });
-            fetchFunc(page);
+            throw error;
         }
     },
 

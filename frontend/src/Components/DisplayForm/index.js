@@ -72,24 +72,27 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
             if(defaultUser) {
                 await ClienteOperations.updateCliente(data);
             } else {
-                await ClienteOperations.saveCliente(data, fetchData, clientes.page);
+                await ClienteOperations.saveCliente(data);
             }
-
-            console.log("CHEGOU AQUI");
 
             fetchData(clientes.page);
         }).catch(function (err) {
-            let errors = {...inputErrors};
-            err.inner.forEach(e => {
-                if(e.path === 'endereco.numero') {
-                    errors['endereco.numero'] = e.message;
-                } else {
-                    errors[e.path] = e.message;
-                }
-            });
+            if(err.inner) {
+                let errors = {...inputErrors};
+                err.inner.forEach(e => {
+                    if(e.path === 'endereco.numero') {
+                        errors['endereco.numero'] = e.message;
+                    } else {
+                     errors[e.path] = e.message;
+                    }
+                });
            
-            setSubmitting(false);
-            setErrors(errors);
+                setSubmitting(false);
+                setErrors(errors);
+            } else {
+                handleClose();
+            }
+            
         });
         
 
