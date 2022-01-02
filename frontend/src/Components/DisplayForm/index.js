@@ -8,7 +8,7 @@ import formatObject from "../../Utils/format_input";
 import Swal from "sweetalert2";
 import './styles.css';
 
-export default function DisplayForm({ fetchData, defaultUser = null }) {
+export default function DisplayForm({ handleClose, fetchData, defaultUser = null }) {
     const clientes = useSelector((state) => state.clientes.value);
     
     const [isSubmitting, setSubmitting] = useState(false);
@@ -79,7 +79,8 @@ export default function DisplayForm({ fetchData, defaultUser = null }) {
                         title: 'Cpf já cadastrado!',
                         icon: 'error'
                     });
-                }).then((res) => fetchData(clientes.page));
+                    handleClose()
+                });
             }
     
             fetchData(clientes.page);
