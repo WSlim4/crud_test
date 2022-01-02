@@ -77,7 +77,9 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
 
             fetchData(clientes.page);
         }).catch(function (err) {
+            console.log("CHEGOU AQUI L-80")
             if(err.inner) {
+                console.log("CHEGOU AQUI L-82")
                 let errors = {...inputErrors};
                 err.inner.forEach(e => {
                     if(e.path === 'endereco.numero') {
@@ -90,6 +92,7 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
                 setSubmitting(false);
                 setErrors(errors);
             } else {
+                console.log("CHEGOU AQUI L-95")
                 handleClose();
             }
             
