@@ -75,11 +75,12 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
                 ClienteOperations.saveCliente(data).then(result => {
                     return result;
                 }).catch(err => {
+                    handleClose();
                     Swal.fire({
                         title: 'Cpf já cadastrado!',
                         icon: 'error'
                     });
-                }).then(res =>  handleClose());
+                });
             }
 
             fetchData(clientes.page);
