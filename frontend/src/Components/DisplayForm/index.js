@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import './styles.css';
 
 export default function DisplayForm({ handleClose, fetchData, defaultUser = null }) {
+    console.log("CHEGOU AQUI L-12")
     const clientes = useSelector((state) => state.clientes.value);
     
     const [isSubmitting, setSubmitting] = useState(false);
@@ -77,7 +78,7 @@ export default function DisplayForm({ handleClose, fetchData, defaultUser = null
 
             fetchData(clientes.page);
         }).catch(function (err) {
-            console.log("CHEGOU AQUI L-80")
+            
             if(err.inner) {
                 console.log("CHEGOU AQUI L-82")
                 let errors = {...inputErrors};
